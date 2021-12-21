@@ -26,6 +26,49 @@ Chore
 
   This commit includes some mock data for potential
   future supporters.
+- Update OKD to latest 4.7. [Carlos Camacho]
+
+  This commit updates the OKD version
+  to the current latest.
+- Use --no-cache-dir flag to pip in dockerfiles, to save space. [Pratik
+  Raj]
+
+  Using "--no-cache-dir" flag in pip install ,make sure dowloaded packages
+  by pip don't cached on system . This is a best practise which make sure
+  to fetch ftom repo instead of using local cached one . Further , in case
+  of Docker Containers , by restricing caching , we can reduce image size.
+  In term of stats , it depends upon the number of python packages
+  multiplied by their respective size . e.g for heavy packages with a lot
+  of dependencies it reduce a lot by don't caching pip packages.
+
+  Further , more detail information can be found at
+
+  https://medium.com/sciforce/strategies-of-docker-images-optimization-2ca9cc5719b6
+- Update copyright message. [Carlos Camacho]
+
+  This commit makes consistent the copy
+  message.
+- Remove extra code. [Carlos Camacho]
+
+  This commit removes extra code that is already
+  applied in the CentOS guest images automatically.
+- Organize files. [Carlos Camacho]
+
+  This commit moves the configure common tasks files
+  to be consistent with all the distros.
+- Add verbose to the CI logs. [Carlos Camacho]
+
+  This commit adds more verbosing to the CI outputs.
+- Fix internal strings. [Carlos Camacho]
+
+  This commit fixes some internal CI links and content.
+- Include disable disruptive. [Carlos Camacho]
+
+  This commit enables the disruptive mode
+  in the subctl verify on demand.
+- Reduce timeouts. [Carlos Camacho]
+
+  This commit reduces the timeouts when testing submariner.
 
 CI
 ~~
@@ -113,252 +156,6 @@ CI
   references to the virtual machine
   hosting the deployment services as they are
   now containerized in the bastion host.
-
-Documentation
-~~~~~~~~~~~~~
-- Forward `README.md` changes to `usage.rst` [R. Mathieu Landvreugd]
-
-  Brings the changes from #568 to the rest of the documentation
-- Fix instructions. [R. Mathieu Landvreugd]
-
-  Fix the instructions, so copy-paste is possible.
-  write out the command options
-- Refator docs. [Carlos Camacho]
-
-  This commit refactors the docs
-  to have a more streamlined view
-  of the content we will like to describe.
-- Include extra symbols. [Carlos Camacho]
-
-  This commit includes the extra symbols available in
-  the rst pages.
-- Include GitHub docs in the code. [Carlos Camacho]
-
-  This commit includes the GH link in the
-  docs pages.
-- Include unicode assets. [Carlos Camacho]
-
-  This commit includes some unicode helpers
-  to add symbols to the docs when they are needed.
-- Sorting titles. [Carlos Camacho]
-
-  This commit sorts the titles consistently.
-- Organize better the usage documentation. [Carlos Camacho]
-
-  This commit sorts better the current usage documentation.
-- Include steps to reach the services pod. [Carlos Camacho]
-
-  This commit includes the documentation
-  for reaching both internal and external
-  resources of the cluster.
-- Include docs for the services pod and spec. [Carlos Camacho]
-
-  This commit adds documentation about the services pod
-  and the Kubeinit spec.
-- Add clarification note about mixed OS. [Carlos Camacho]
-
-  This commit adds a note about the support
-  of having mixed OS in the cluster hosts.
-- Add gcp as a supporter. [Carlos Camacho]
-
-  This commit adds GCP as a supporter.
-- Include link to github. [Carlos Camacho]
-
-  This commit adds the link to the
-  main project's repo.
-- Update correct domain. [Carlos Camacho]
-
-  All the domains were wrong, this commit
-  fixes all the referencies.
-- Include notice. [Carlos Camacho]
-
-  This commit includes a disclaimer notice about
-  the potential damage the automation can cause
-  to production environments if not taking percautions.
-- Reduce image size. [Carlos Camacho]
-
-  This commit fixes the logos height
-  in the sphinx theme.
-- Fix styles and rst for supporters. [Carlos Camacho]
-
-  This commit makes the style changes to
-  show properly additional supporters.
-- Include Docker Hub info. [Carlos Camacho]
-
-  This commit updated Docker's decription.
-- Fix supporters styles. [Carlos Camacho]
-
-  This commit fixes some styling issues
-  after having all the required images
-  and content.
-- Fix images path. [Carlos Camacho]
-
-  This commit fixes the paths for the
-  supporters images.
-- Add supporters page. [Carlos Camacho]
-
-  This commit includes a docs page
-  to thank the supporters of this
-  project.
-
-Features
-~~~~~~~~
-- Add ansible setup for kubeinit. [Glenn Marcy]
-
-  This commit adds a new setup folder that contains an inventory
-  and playbook that can be used to initialize a new ansible env
-  where kubeinit has been setup and is ready for immediate use
-  for deployments, testing, development, etc.
-- Include submariner deployments. [Carlos Camacho]
-
-  This commit enables the submariner
-  deployment in a multicluster environment.
-- Added variable for selecting the ssh keytype. [Glenn Marcy]
-- Update OKD version. [Carlos Camacho]
-
-  This commit updates the OKD version
-  that is deployed by default.
-
-Fixes
-~~~~~
-- Add a blocking timeout to get results. [Carlos Camacho]
-
-  This commit includes a timeout to fetch the
-  CI results page.
-- Move to OVNKubernetes. [Carlos Camacho]
-
-  This commit moves the default CNI
-  cluster network provider to
-  OVNKubernetes as it will be the
-  eventual default.
-- Adjust date and job id. [Carlos Camacho]
-
-  This commit fixes the CI job index with the
-  correct date and job ID per PR job.
-- Allow having kubectl in cdk service pod and enable sampleapp. [Carlos
-  Camacho]
-
-  This commit makes sure kubectl is enabled in the services pod, and
-  the sample app is deployed correctly in CDK.
-- Remove virt-top from Debian 11 and add testing repos. [Carlos Camacho]
-
-  In Debian 11 is not yet published the list of OVN
-  packages to deploy the cluster.
-  This commit removes virt-top as is not available anymore,
-  and enables the testing repos.
-- Include the correct protobuf version. [Carlos Camacho]
-
-  This commit makes sure we have protobuf>=3.12.0
-  installed before pushing the CI files.
-- Better messages when not asked to stop. [Glenn Marcy]
-- Reorder commands under multi-cluster deployment. [Glenn Marcy]
-- Update data center definition. [Glenn Marcy]
-
-  This commit updates the inventory file to
-  support multicluster deployments.
-- Include the multicluster deployment. [Carlos Camacho]
-
-  This commit includes the multicluster deployment,
-  before we had to run the deployment command
-  multiple times.
-- Use full path when calling OVN/OVN commands. [Carlos Camacho]
-
-  The first time we deploy in new baremetal hosts
-  after installing the required packages to install
-  the SDN the path is not updated in runtime, this
-  makes the deployment to fail the first time.
-- Update services role reference to create_network location. [Glenn
-  Marcy]
-
-Refactor
-~~~~~~~~
-- Support multiple clusters per inventory. [Glenn Marcy]
-
-  This commit adds support for multiple clusters deployed from the
-  same inventory.  Most changes are to names of resources that need
-  to be distinct so that clusters can co-exist.
-- Documentation graph improvements. [Glenn Marcy]
-- Consolidate all distro inventories. [Glenn Marcy]
-
-  - Remove distro-specific inventory files and playbooks.  All
-    inventory is now generated dynamically from a much smaller
-    common static inventory, ./kubeinit/inventory, and the new
-    kubeinit_spec variable that is passed on the command line.
-    The syntax for that value is:
-      <distro>-<driver>-<controllers>-<computes>-<hypervisors>
-  - Remove instructions for adding hypervisor host entries to the
-    /etc/hosts file of machine where the ansible playbook is run.
-    It is sufficient to just add aliases for any hypervisor hosts
-    in the inventory to ~/.ssh/config entries.
-  - Update examples in documentation to match new CLI syntax.
-  - Test paths for okd.rke/submariner deployments have been removed
-    temporarily as we work on the new support for multiple deployed
-    clusters on the same hypervisor hosts.
-  - Simplify inventory network configuration to generate any needed
-    network addresses from the cluster network dynamically.  Only
-    the CIDR for the cluster network is required, which still has
-    the same 10.0.0.0/24 default.
-  - Change EKS to lookup current stable kubernetes release from the
-    distribution website.
-  - Update OKD release to 4.8 and FCOS/RHCOS releases from 33/4.7 to
-    34/4.8 respectively.
-- Move tasks from post-deployment to deploy-cluster. [Glenn Marcy]
-- Replace with_items with loop and other updates. [Glenn Marcy]
-
-
-v2.0.0 - Release date: 2021-09-30
----------------------------------
-
-
-
-Chore
-~~~~~
-- Update OKD to latest 4.7. [Carlos Camacho]
-
-  This commit updates the OKD version
-  to the current latest.
-- Use --no-cache-dir flag to pip in dockerfiles, to save space. [Pratik
-  Raj]
-
-  Using "--no-cache-dir" flag in pip install ,make sure dowloaded packages
-  by pip don't cached on system . This is a best practise which make sure
-  to fetch ftom repo instead of using local cached one . Further , in case
-  of Docker Containers , by restricing caching , we can reduce image size.
-  In term of stats , it depends upon the number of python packages
-  multiplied by their respective size . e.g for heavy packages with a lot
-  of dependencies it reduce a lot by don't caching pip packages.
-
-  Further , more detail information can be found at
-
-  https://medium.com/sciforce/strategies-of-docker-images-optimization-2ca9cc5719b6
-- Update copyright message. [Carlos Camacho]
-
-  This commit makes consistent the copy
-  message.
-- Remove extra code. [Carlos Camacho]
-
-  This commit removes extra code that is already
-  applied in the CentOS guest images automatically.
-- Organize files. [Carlos Camacho]
-
-  This commit moves the configure common tasks files
-  to be consistent with all the distros.
-- Add verbose to the CI logs. [Carlos Camacho]
-
-  This commit adds more verbosing to the CI outputs.
-- Fix internal strings. [Carlos Camacho]
-
-  This commit fixes some internal CI links and content.
-- Include disable disruptive. [Carlos Camacho]
-
-  This commit enables the disruptive mode
-  in the subctl verify on demand.
-- Reduce timeouts. [Carlos Camacho]
-
-  This commit reduces the timeouts when testing submariner.
-
-CI
-~~
 - Call the get issue method. [Carlos Camacho]
 
   This commit calls correctly
@@ -610,6 +407,90 @@ CI
 
 Documentation
 ~~~~~~~~~~~~~
+- Forward `README.md` changes to `usage.rst` [R. Mathieu Landvreugd]
+
+  Brings the changes from #568 to the rest of the documentation
+- Fix instructions. [R. Mathieu Landvreugd]
+
+  Fix the instructions, so copy-paste is possible.
+  write out the command options
+- Refator docs. [Carlos Camacho]
+
+  This commit refactors the docs
+  to have a more streamlined view
+  of the content we will like to describe.
+- Include extra symbols. [Carlos Camacho]
+
+  This commit includes the extra symbols available in
+  the rst pages.
+- Include GitHub docs in the code. [Carlos Camacho]
+
+  This commit includes the GH link in the
+  docs pages.
+- Include unicode assets. [Carlos Camacho]
+
+  This commit includes some unicode helpers
+  to add symbols to the docs when they are needed.
+- Sorting titles. [Carlos Camacho]
+
+  This commit sorts the titles consistently.
+- Organize better the usage documentation. [Carlos Camacho]
+
+  This commit sorts better the current usage documentation.
+- Include steps to reach the services pod. [Carlos Camacho]
+
+  This commit includes the documentation
+  for reaching both internal and external
+  resources of the cluster.
+- Include docs for the services pod and spec. [Carlos Camacho]
+
+  This commit adds documentation about the services pod
+  and the Kubeinit spec.
+- Add clarification note about mixed OS. [Carlos Camacho]
+
+  This commit adds a note about the support
+  of having mixed OS in the cluster hosts.
+- Add gcp as a supporter. [Carlos Camacho]
+
+  This commit adds GCP as a supporter.
+- Include link to github. [Carlos Camacho]
+
+  This commit adds the link to the
+  main project's repo.
+- Update correct domain. [Carlos Camacho]
+
+  All the domains were wrong, this commit
+  fixes all the referencies.
+- Include notice. [Carlos Camacho]
+
+  This commit includes a disclaimer notice about
+  the potential damage the automation can cause
+  to production environments if not taking percautions.
+- Reduce image size. [Carlos Camacho]
+
+  This commit fixes the logos height
+  in the sphinx theme.
+- Fix styles and rst for supporters. [Carlos Camacho]
+
+  This commit makes the style changes to
+  show properly additional supporters.
+- Include Docker Hub info. [Carlos Camacho]
+
+  This commit updated Docker's decription.
+- Fix supporters styles. [Carlos Camacho]
+
+  This commit fixes some styling issues
+  after having all the required images
+  and content.
+- Fix images path. [Carlos Camacho]
+
+  This commit fixes the paths for the
+  supporters images.
+- Add supporters page. [Carlos Camacho]
+
+  This commit includes a docs page
+  to thank the supporters of this
+  project.
 - Update clean tasks. [Carlos Camacho]
 
   This commit updates the way to clean up the hypervisors.
@@ -643,6 +524,21 @@ Documentation
 
 Features
 ~~~~~~~~
+- Add ansible setup for kubeinit. [Glenn Marcy]
+
+  This commit adds a new setup folder that contains an inventory
+  and playbook that can be used to initialize a new ansible env
+  where kubeinit has been setup and is ready for immediate use
+  for deployments, testing, development, etc.
+- Include submariner deployments. [Carlos Camacho]
+
+  This commit enables the submariner
+  deployment in a multicluster environment.
+- Added variable for selecting the ssh keytype. [Glenn Marcy]
+- Update OKD version. [Carlos Camacho]
+
+  This commit updates the OKD version
+  that is deployed by default.
 - Release 2.0.0. [Carlos Camacho]
 
   This commit releases a new version of
@@ -916,6 +812,54 @@ Features
 
 Fixes
 ~~~~~
+- Add a blocking timeout to get results. [Carlos Camacho]
+
+  This commit includes a timeout to fetch the
+  CI results page.
+- Move to OVNKubernetes. [Carlos Camacho]
+
+  This commit moves the default CNI
+  cluster network provider to
+  OVNKubernetes as it will be the
+  eventual default.
+- Adjust date and job id. [Carlos Camacho]
+
+  This commit fixes the CI job index with the
+  correct date and job ID per PR job.
+- Allow having kubectl in cdk service pod and enable sampleapp. [Carlos
+  Camacho]
+
+  This commit makes sure kubectl is enabled in the services pod, and
+  the sample app is deployed correctly in CDK.
+- Remove virt-top from Debian 11 and add testing repos. [Carlos Camacho]
+
+  In Debian 11 is not yet published the list of OVN
+  packages to deploy the cluster.
+  This commit removes virt-top as is not available anymore,
+  and enables the testing repos.
+- Include the correct protobuf version. [Carlos Camacho]
+
+  This commit makes sure we have protobuf>=3.12.0
+  installed before pushing the CI files.
+- Better messages when not asked to stop. [Glenn Marcy]
+- Reorder commands under multi-cluster deployment. [Glenn Marcy]
+- Update data center definition. [Glenn Marcy]
+
+  This commit updates the inventory file to
+  support multicluster deployments.
+- Include the multicluster deployment. [Carlos Camacho]
+
+  This commit includes the multicluster deployment,
+  before we had to run the deployment command
+  multiple times.
+- Use full path when calling OVN/OVN commands. [Carlos Camacho]
+
+  The first time we deploy in new baremetal hosts
+  after installing the required packages to install
+  the SDN the path is not updated in runtime, this
+  makes the deployment to fail the first time.
+- Update services role reference to create_network location. [Glenn
+  Marcy]
 - Add new line waiting for converge. [Carlos Camacho]
 
   This commit adds a new line so we wait
@@ -1376,6 +1320,38 @@ Performance
 
 Refactor
 ~~~~~~~~
+- Support multiple clusters per inventory. [Glenn Marcy]
+
+  This commit adds support for multiple clusters deployed from the
+  same inventory.  Most changes are to names of resources that need
+  to be distinct so that clusters can co-exist.
+- Documentation graph improvements. [Glenn Marcy]
+- Consolidate all distro inventories. [Glenn Marcy]
+
+  - Remove distro-specific inventory files and playbooks.  All
+    inventory is now generated dynamically from a much smaller
+    common static inventory, ./kubeinit/inventory, and the new
+    kubeinit_spec variable that is passed on the command line.
+    The syntax for that value is:
+      <distro>-<driver>-<controllers>-<computes>-<hypervisors>
+  - Remove instructions for adding hypervisor host entries to the
+    /etc/hosts file of machine where the ansible playbook is run.
+    It is sufficient to just add aliases for any hypervisor hosts
+    in the inventory to ~/.ssh/config entries.
+  - Update examples in documentation to match new CLI syntax.
+  - Test paths for okd.rke/submariner deployments have been removed
+    temporarily as we work on the new support for multiple deployed
+    clusters on the same hypervisor hosts.
+  - Simplify inventory network configuration to generate any needed
+    network addresses from the cluster network dynamically.  Only
+    the CIDR for the cluster network is required, which still has
+    the same 10.0.0.0/24 default.
+  - Change EKS to lookup current stable kubernetes release from the
+    distribution website.
+  - Update OKD release to 4.8 and FCOS/RHCOS releases from 33/4.7 to
+    34/4.8 respectively.
+- Move tasks from post-deployment to deploy-cluster. [Glenn Marcy]
+- Replace with_items with loop and other updates. [Glenn Marcy]
 - Remove unused, rename consistency. [Glenn Marcy]
 - Use cluster name in all named cluster resources. [Glenn Marcy]
 
